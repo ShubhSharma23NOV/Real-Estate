@@ -56,8 +56,7 @@
                         <label for="ur" class="form-label">I am a</label>
                         <select id="ur" name="ur" class="form-input" required>
                             <option value="">Select User Type</option>
-                            <option value="BUYER">Buyer</option>
-                            <option value="SELLER">Seller</option>
+                            <option value="USER">User</option>
                             <option value="AGENT">Agent</option>
                             <option value="ADMIN">Admin</option>
                         </select>

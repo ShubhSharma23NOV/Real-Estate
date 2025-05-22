@@ -261,4 +261,92 @@ body {
     color: var(--accent-color);
     margin-bottom: 1.5rem;
     text-align: center;
+}
+
+/* Property Page Specific Styles */
+.filter-section {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+}
+
+.property-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.property-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.property-image {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+.price-tag {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+/* Form Elements for Property Page */
+.form-select, .form-control {
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    color: var(--primary-text);
+}
+
+.form-select:focus, .form-control:focus {
+    background-color: var(--secondary-bg);
+    border-color: var(--accent-color);
+    color: var(--primary-text);
+}
+
+.form-label {
+    color: var(--secondary-text);
+}
+
+/* Property Page Buttons */
+.btn-primary {
+    background-color: var(--accent-color);
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: var(--hover-color);
+}
+
+.btn-outline-primary {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+/* Property Page Pagination */
+.pagination .page-link {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+    color: var(--primary-text);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.pagination .page-link:hover {
+    background-color: var(--secondary-bg);
+    color: var(--accent-color);
 } 

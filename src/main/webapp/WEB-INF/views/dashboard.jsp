@@ -60,6 +60,7 @@
             <a href="${pageContext.request.contextPath}/dashboard">Dashboard</a>
             <a href="${pageContext.request.contextPath}/dashboard/favorites">My Favorites</a>
             <a href="${pageContext.request.contextPath}/dashboard/profile">Profile</a>
+            <a href="/dashboard/properties">Property</a>
             <a href="${pageContext.request.contextPath}/dashboard/logout">Logout</a>
         </nav>
     </header>
@@ -142,28 +143,6 @@
                 </div>
             </div>
         </section>
-
-        <section class="mb-2">
-            <h2 class="section-title">Recent Searches</h2>
-            <div class="form-container">
-                <div class="property-info">
-                    <p>Beverly Hills Mansions</p>
-                    <p>Downtown Penthouses</p>
-                    <p>Beachfront Properties</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-2">
-            <h2 class="section-title">Saved Searches</h2>
-            <div class="form-container">
-                <div class="property-info">
-                    <p>Price Range: $1M - $2M</p>
-                    <p>Location: Malibu</p>
-                    <p>Features: Pool, Ocean View</p>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer class="footer">
@@ -177,6 +156,7 @@
                 <a href="${pageContext.request.contextPath}/dashboard">Dashboard</a>
                 <a href="${pageContext.request.contextPath}/dashboard/favorites">My Favorites</a>
                 <a href="${pageContext.request.contextPath}/dashboard/profile">Profile</a>
+                <a href="/dashboard/properties">Property</a>
             </div>
             <div class="footer-section">
                 <h3>Contact Us</h3>
