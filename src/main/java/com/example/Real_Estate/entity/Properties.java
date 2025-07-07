@@ -1,8 +1,15 @@
 package com.example.Real_Estate.entity;
 
-import java.sql.Blob;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Properties {
@@ -32,17 +39,21 @@ public class Properties {
 	private String zipCode;
 	@Column
 	private String country;
+	@Column
+	private Double area;
+	@Column
+	private String areaUnit;
 	
 	
 	@Override
 	public String toString() {
 		return "Properties [id=" + id + "user_id="+user_id+", propertyType=" + propertyType
 				+ ", status=" + status + ", address=" + address + ", city=" + city + ", state=" + state + ", zipCode="
-				+ zipCode + ", country=" + country  + "price="+price+"]";
+				+ zipCode + ", country=" + country  + "price="+price+", area="+area+", areaUnit="+areaUnit+"]";
 	}
 	public Properties() {}
 	public Properties(Long id, User user_id, PropertyType propertyType, PropertyStatus status, String address, String city,
-			String state, String zipCode, String country,Long price) {
+			String state, String zipCode, String country, Long price, Double area, String areaUnit) {
 		super();
 		this.id = id;
 		this.user_id = user_id;
@@ -53,8 +64,9 @@ public class Properties {
 		this.state = state;
 		this.zipCode = zipCode;
 		this.country = country;
-		this.price=price;
-		
+		this.price = price;
+		this.area = area;
+		this.areaUnit = areaUnit;
 	}
 	public Long getId() {
 		return id;
@@ -116,5 +128,19 @@ public class Properties {
 	}
 	public void setCountry(String country) {
 		this.country = country;
+	}
+	
+	public Double getArea() {
+		return area;
+	}
+	
+	public void setArea(Double area) {
+		this.area = area;
+	}
+	public String getAreaUnit() {
+		return areaUnit;
+	}
+	public void setAreaUnit(String areaUnit) {
+		this.areaUnit = areaUnit;
 	}
 }

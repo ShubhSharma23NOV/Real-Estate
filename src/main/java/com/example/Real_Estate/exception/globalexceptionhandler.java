@@ -19,14 +19,10 @@ public class globalexceptionhandler {
 	public String handleaNoResourceFoundException(org.springframework.web.servlet.resource.NoResourceFoundException e) {
 		return "Page Not Found";
 	}
-	@RestControllerAdvice
-	public class GlobalExceptionHandler {
-
-	    @ExceptionHandler(NoSuchElementException.class)
-	    public String handleNoSuchElementException(NoSuchElementException ex) {
-	        return ex.getMessage();
-	    }
-	}
-
 	
+
+	 @ExceptionHandler(NoSuchElementException.class)
+	 public String handleNoSuchElementException(NoSuchElementException ex) {
+	        return ex.getMessage();
+	 }
 }

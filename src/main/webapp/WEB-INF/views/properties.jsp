@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.example.Real_Estate.entity.User" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,129 +7,231 @@
     <title>Properties - LuxuryEstate</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/darktheme.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/newcss.css">
+    <style>
+        .properties-container {
+            padding: 2rem;
+            min-height: calc(100vh - 80px);
+        }
+
+        .filter-section {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .property-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            border-color: var(--secondary-color);
+        }
+
+        .property-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .property-details {
+            padding: 1.5rem;
+        }
+
+        .property-price {
+            color: var(--secondary-color);
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .property-location {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .property-features {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        .feature i {
+            color: var(--secondary-color);
+        }
+
+        .btn-view {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            width: 100%;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-view:hover {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            padding-right: 3rem;
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary-color);
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
-        <nav class="nav-menu">
-            <a href="${pageContext.request.contextPath}/dashboard">Dashboard</a>
-            <a href="${pageContext.request.contextPath}/dashboard/favorites">My Favorites</a>
-            <a href="${pageContext.request.contextPath}/dashboard/profile">Profile</a>
-            <a href="/dashboard/properties">Property</a>
-            <a href="${pageContext.request.contextPath}/dashboard/logout">Logout</a>
-        </nav>
-    </header>
-
-    <div class="container mt-4">
-        <h1 class="section-title">Property Listings</h1>
-        
-        <!-- Search and Filter Section -->
-        <div class="filter-section">
-            <form action="/properties" method="GET" class="row g-3">
-                <div class="col-md-3">
-                    <label for="propertyType" class="form-label">Property Type</label>
-                    <select class="form-select" id="propertyType" name="propertyType">
-                        <option value="">All Types</option>
-                        <option value="house">House</option>
-                        <option value="apartment">Apartment</option>
-                        <option value="condo">Condo</option>
-                        <option value="townhouse">Townhouse</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <label for="priceRange" class="form-label">Price Range</label>
-                    <select class="form-select" id="priceRange" name="priceRange">
-                        <option value="">Any Price</option>
-                        <option value="0-100000">$0 - $100,000</option>
-                        <option value="100000-300000">$100,000 - $300,000</option>
-                        <option value="300000-500000">$300,000 - $500,000</option>
-                        <option value="500000+">$500,000+</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <label for="bedrooms" class="form-label">Bedrooms</label>
-                    <select class="form-select" id="bedrooms" name="bedrooms">
-                        <option value="">Any</option>
-                        <option value="1">1+</option>
-                        <option value="2">2+</option>
-                        <option value="3">3+</option>
-                        <option value="4">4+</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <label for="bathrooms" class="form-label">Bathrooms</label>
-                    <select class="form-select" id="bathrooms" name="bathrooms">
-                        <option value="">Any</option>
-                        <option value="1">1+</option>
-                        <option value="2">2+</option>
-                        <option value="3">3+</option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <label for="location" class="form-label">Location</label>
-                    <input type="text" class="form-control" id="location" name="location" placeholder="Enter city, state, or zip">
-                </div>
-                <div class="col-md-3">
-                    <label for="sortBy" class="form-label">Sort By</label>
-                    <select class="form-select" id="sortBy" name="sortBy">
-                        <option value="newest">Newest</option>
-                        <option value="price_low">Price: Low to High</option>
-                        <option value="price_high">Price: High to Low</option>
-                    </select>
-                </div>
-                <div class="col-md-3 d-flex align-items-end">
-                    <button type="submit" class="btn btn-primary w-100">
-                        <i class="fas fa-search"></i> Search Properties
-                    </button>
-                </div>
-            </form>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/">
+                <i class="fas fa-home me-2"></i>LuxuryEstate
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="${pageContext.request.contextPath}/properties">
+                            <i class="fas fa-building me-1"></i> Properties
+                        </a>
+                    </li>
+                    <c:if test="${sessionScope.user != null}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="${pageContext.request.contextPath}/myproperties">
+                                <i class="fas fa-list me-1"></i> My Properties
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="${pageContext.request.contextPath}/profile">
+                                <i class="fas fa-user me-1"></i> Profile
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="${pageContext.request.contextPath}/logout">
+                                <i class="fas fa-sign-out-alt me-1"></i> Logout
+                            </a>
+                        </li>
+                    </c:if>
+                    <c:if test="${sessionScope.user == null}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="${pageContext.request.contextPath}/login">
+                                <i class="fas fa-sign-in-alt me-1"></i> Login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="${pageContext.request.contextPath}/register">
+                                <i class="fas fa-user-plus me-1"></i> Register
+                            </a>
+                        </li>
+                    </c:if>
+                </ul>
+            </div>
         </div>
+    </nav>
 
-        <!-- Property Listings -->
-        <div class="row">
-            
+    <div class="properties-container">
+        <div class="container">
+            <div class="filter-section">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="search-box">
+                            <input type="text" class="form-control" placeholder="Search properties...">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-select">
+                            <option value="">Property Type</option>
+                            <option value="house">House</option>
+                            <option value="apartment">Apartment</option>
+                            <option value="villa">Villa</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-select">
+                            <option value="">Price Range</option>
+                            <option value="0-100000">$0 - $100,000</option>
+                            <option value="100000-300000">$100,000 - $300,000</option>
+                            <option value="300000-500000">$300,000 - $500,000</option>
+                            <option value="500000+">$500,000+</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-primary w-100">Filter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <c:forEach items="${properties}" var="property">
+                    <div class="col-md-4">
+                        <div class="property-card">
+                            <img src="${property.imageUrl}" alt="${property.title}" class="property-image">
+                            <div class="property-details">
+                                <h3 class="property-title">${property.title}</h3>
+                                <p class="property-price">$${property.price}</p>
+                                <p class="property-location">
+                                    <i class="fas fa-map-marker-alt me-1"></i>${property.location}
+                                </p>
+                                <div class="property-features">
+                                    <span class="feature">
+                                        <i class="fas fa-bed"></i>${property.bedrooms} Beds
+                                    </span>
+                                    <span class="feature">
+                                        <i class="fas fa-bath"></i>${property.bathrooms} Baths
+                                    </span>
+                                    <span class="feature">
+                                        <i class="fas fa-ruler-combined"></i>${property.area} sqft
+                                    </span>
+                                </div>
+                                <a href="${pageContext.request.contextPath}/property/${property.id}" class="btn-view">
+                                    View Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
         </div>
-
-        <!-- Pagination -->
-        <nav aria-label="Property listings pagination" class="mt-4">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
     </div>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>About LuxuryEstate</h3>
-                <p>Your premier destination for luxury real estate properties. We connect discerning buyers with exceptional properties.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <a href="${pageContext.request.contextPath}/dashboard">Dashboard</a>
-                <a href="${pageContext.request.contextPath}/dashboard/favorites">My Favorites</a>
-                <a href="${pageContext.request.contextPath}/dashboard/profile">Profile</a>
-                <a href="/dashboard/properties">Property</a>
-            </div>
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <p>Email: info@luxuryestate.com</p>
-                <p>Phone: (555) 123-4567</p>
-                <p>Address: 123 Luxury Lane, Beverly Hills, CA 90210</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 LuxuryEstate. All rights reserved.</p>
-        </div>
-    </footer>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

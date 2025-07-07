@@ -11,26 +11,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.Real_Estate.ServiceImpl.PropServiceImpl;
 import com.example.Real_Estate.ServiceImpl.UServiceImpl;
-import com.example.Real_Estate.entity.Properties;
 import com.example.Real_Estate.entity.User;
 import com.example.Real_Estate.entity.UserRole;
 
 import jakarta.servlet.http.HttpSession;
 
-
 @Controller
 public class ViewController {
-
 	@Autowired
 	private UServiceImpl u1;
 	
 	
 	@Autowired
 	private PropServiceImpl p1;
-	
+
 	@RequestMapping("/")
 	public String index() {
 		return "index";
+	}
+	@RequestMapping("/about")
+	public String about() {
+		return "about";
+	}
+	@RequestMapping("/contact")
+	public String contact() {
+		return "contact";
 	}
 	@GetMapping("/login")
 	public String login(Model model) {
@@ -39,21 +44,19 @@ public class ViewController {
 	@PostMapping("/log")
 	public String log(@RequestParam String email,
 					 @RequestParam String password,
-					 @RequestParam UserRole userType,
 					 HttpSession session,
 					 Model model) {
-		User u = u1.login(email, password, userType);
-		
-		if(u != null) {
+		User u = u1.login(email, password);
+		if(u != null ) {
 			session.setAttribute("user", u);
-			if(userType.USER == u.getUr()) return "dashboard";
-			else if(userType.ADMIN == u.getUr()) return "admin-dashboard";
-			else return "agent";
+			if(UserRole.USER == u.getUr()) return "redirect:/user/dashboard";
+			else if(UserRole.ADMIN == u.getUr()) return "redirect:/admin/dashboard";
+			else return "redirect:/agent/dashboard";
 		}
 		
 		model.addAttribute("error", "Invalid email or password. Please try again.");
 		model.addAttribute("email", email);
-		model.addAttribute("userType", userType);
+//		model.addAttribute("userType", u.getUr());
 		return "login";
 	}
 	@PostMapping("/regis")
@@ -65,30 +68,22 @@ public class ViewController {
 	public String register() {
 		return "register";
 	}
-	@RequestMapping("/dashboard/properties")
+	@RequestMapping("/properties")
 	public String Property() {
 		return "properties";
 	}
-	@GetMapping("/dashboard/profile")
-	public String profile() {
+	@GetMapping("/profile")
+	public String profile(HttpSession session,Model model) {
+		User u=(User)session.getAttribute("user");
+		model.addAttribute("ur",u.getUr().name().toLowerCase());
 		return "profile";
 	}
-	@RequestMapping("/dashboard/logout")
+	@RequestMapping("/logout")
 	public String logout() {
 		return "login";
 	}
-	@RequestMapping("/agent")
-	public String agent_dash() {
-		return "agent";
-	}
-	@PostMapping("/agent/properties/add")
-	public String addProperty(@ModelAttribute Properties p, HttpSession session) {
-		User loggedInUser = (User) session.getAttribute("user");
-		
-		System.out.println(loggedInUser);
-		
-		p.setUser_id(loggedInUser);
-		p1.add(p);
-		return "redirect:/agent";
+	@RequestMapping("/filter")
+	public String filterPage() {
+		return "filter";
 	}
 }

@@ -349,4 +349,142 @@ body {
 .pagination .page-link:hover {
     background-color: var(--secondary-bg);
     color: var(--accent-color);
+}
+
+/* My Properties Page Styles */
+.property-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.property-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.property-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.property-status {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.9em;
+    color: var(--primary-text);
+}
+
+.status-available { background: var(--accent-color); }
+.status-pending { background: var(--warning-color); color: var(--text-dark); }
+.status-sold { background: var(--danger-color); }
+
+.property-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.property-details div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--primary-text);
+}
+
+.property-details i {
+    color: var(--accent-color);
+    width: 20px;
+}
+
+.property-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+}
+
+.search-filters {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+}
+
+/* Modal Styles */
+.modal-content {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--border-color);
+}
+
+/* Form Elements */
+.form-control, .form-select {
+    background: var(--secondary-bg);
+    border-color: var(--border-color);
+    color: var(--primary-text);
+}
+
+.form-control::placeholder {
+    color: var(--primary-text);
+    opacity: 0.7;
+}
+
+.form-control:focus, .form-select:focus {
+    background: var(--secondary-bg);
+    border-color: var(--accent-color);
+    color: var(--primary-text);
+    box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25);
+}
+
+.form-label {
+    color: var(--primary-text);
+}
+
+/* Button Styles */
+.btn-outline-primary {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.btn-outline-primary:hover {
+    background: var(--accent-color);
+    color: var(--primary-text);
+}
+
+.btn-outline-info {
+    color: var(--info-color);
+    border-color: var(--info-color);
+}
+
+.btn-outline-info:hover {
+    background: var(--info-color);
+    color: var(--primary-text);
+}
+
+.btn-outline-danger {
+    color: var(--danger-color);
+    border-color: var(--danger-color);
+}
+
+.btn-outline-danger:hover {
+    background: var(--danger-color);
+    color: var(--primary-text);
 } 
